@@ -1,6 +1,6 @@
 @extends('admin.base')
 
-@section('title', $option->exists ? 'Editer une option' : 'Créer une option');
+@section('title', $option->exists ? 'Editer une option' : 'Créer une option')
 
 @section('content')
 

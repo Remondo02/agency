@@ -1,6 +1,6 @@
 @extends('admin.base')
 
-@section('title', $property->exists ? 'Editer un bien' : 'Créer un bien');
+@section('title', $property->exists ? 'Editer un bien' : 'Créer un bien')
 
 @section('content')
 
