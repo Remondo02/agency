@@ -16,7 +16,7 @@ class PropertyController extends Controller
     public function index()
     {
         return view('admin.properties.index', [
-            'properties' => Property::orderBy('created_at', 'desc')->paginate(25),
+            'properties' => Property::orderBy('created_at', 'desc')->withTrashed()->paginate(25),
         ]);
     }
 
@@ -81,6 +81,10 @@ class PropertyController extends Controller
     {
         Picture::destroy($property->pictures()->pluck('id'));
         $property->delete();
+        // Supprime définitivement les données lorsqu'un soft delete est en place
+        // $property->forceDelete();
+        // Remettre le deleted_at a null
+        // $property->restore();
         return to_route('admin.property.index')->with('success', 'Le bien a bien été supprimé');
     }
 }
