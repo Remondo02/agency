@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -61,5 +62,15 @@ class Property extends Model
     public function getPicture(): ?Picture
     {
         return $this->pictures[0] ?? null;
+    }
+
+    public function scopeAvailable(Builder $builder, bool $available = true): Builder
+    {
+        return $builder->where('sold', !$available);
+    }
+
+    public function scopeRecent(Builder $builder): Builder
+    {
+        return $builder->orderBy('created_at', 'desc');
     }
 }
