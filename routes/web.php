@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\PictureController;
 use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -24,7 +25,8 @@ Route::delete('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () use ($idRegex) {
     Route::resource('property', AdminPropertyController::class)->except(['show']);
     Route::resource('option', OptionController::class)->except(['show']);
+    Route::delete('/picture/{picture}', [PictureController::class, 'destroy'])->name('picture.destroy')->where(['picture' => $idRegex]);
 });

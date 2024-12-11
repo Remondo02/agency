@@ -14,7 +14,7 @@
         @method($property->exists ? 'put' : 'post')
 
         <div class="row">
-            <div class="col" style="flex: 100">
+            <div class="col vstack gap-2" style="flex: 100">
                 <div class="row">
                     @include('shared.input', [
                         'class' => 'col',
@@ -98,10 +98,28 @@
                     'value' => $property->sold,
                     'options' => $options,
                 ])
+                <div>
+                    <button class="btn btn-primary">
+                        @if ($property->exists)
+                            Modifier
+                        @else
+                            Créer
+                        @endif
+                    </button>
+                </div>
             </div>
-            <div class="col" style="flex: 25">
+            <div class="col vstack gap-3" style="flex: 25">
                 @foreach ($property->pictures as $picture)
-                    <img src="{{ $picture->getImageUrl() }}" class="w-100 d-block">
+                    <div id="picture{{ $picture->id }}" class="position-relative">
+                        <img src="{{ $picture->getImageUrl() }}" class="w-100 d-block">
+                        <button type="button" class="btn btn-danger position-absolute bottom-0 w-100 start-0"
+                            hx-delete="{{ route('admin.picture.destroy', $picture) }}"
+                            hx-target="#picture{{ $picture->id }}" hx-swap="delete">
+                            <span class="htmx-indicator spinner-border spinner-border-sm" role="status"
+                                aria-hidden="true"></span>
+                            Supprimer
+                        </button>
+                    </div>
                 @endforeach
                 @include('shared.upload', [
                     'name' => 'pictures',
@@ -109,16 +127,6 @@
                     'multiple' => true,
                 ])
             </div>
-        </div>
-
-        <div>
-            <button class="btn btn-primary">
-                @if ($property->exists)
-                    Modifier
-                @else
-                    Créer
-                @endif
-            </button>
         </div>
     </form>
 
