@@ -1,4 +1,9 @@
 <div class="card">
+    @if ($property->getPicture())
+        <img src="{{ $property->getPicture()->getImageUrl() }}" alt="" class="w-100">
+    @else
+        <img src="/placeholder.jpg" alt="" class="w-100">
+    @endif
     <div class="card-body">
         <h5 class="card-title">
             <a

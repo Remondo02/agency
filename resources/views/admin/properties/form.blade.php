@@ -7,7 +7,8 @@
     <h1>@yield('title')</h1>
 
     <form class="vstack gap-2"
-        action="{{ route($property->exists ? 'admin.property.update' : 'admin.property.store', $property) }}" method="post" enctype="multipart/form-data">
+        action="{{ route($property->exists ? 'admin.property.update' : 'admin.property.store', $property) }}" method="post"
+        enctype="multipart/form-data">
 
         @csrf
         @method($property->exists ? 'put' : 'post')
@@ -100,7 +101,7 @@
             </div>
             <div class="col" style="flex: 25">
                 @foreach ($property->pictures as $picture)
-                    <img src="{{asset($picture->filename)}}" class="w-100 d-block">
+                    <img src="{{ $picture->getImageUrl() }}" class="w-100 d-block">
                 @endforeach
                 @include('shared.upload', [
                     'name' => 'pictures',
