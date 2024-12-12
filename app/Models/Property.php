@@ -27,6 +27,11 @@ class Property extends Model
         'sold',
     ];
 
+    // Permet d'associer un type défini à un attribut.
+    protected $casts = [
+        'sold' => 'boolean',
+    ];
+
     public function options(): BelongsToMany
     {
         return $this->belongsToMany(Option::class);
