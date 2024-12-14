@@ -31,5 +31,6 @@ Route::get('/images/{path}', [ImageController::class, 'show'])->where('path', '.
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () use ($idRegex) {
     Route::resource('property', AdminPropertyController::class)->except(['show']);
     Route::resource('option', OptionController::class)->except(['show']);
-    Route::delete('/picture/{picture}', [PictureController::class, 'destroy'])->name('picture.destroy')->where(['picture' => $idRegex]);
+    // Policy appliqué depuis la route avec le middleware can
+    Route::delete('/picture/{picture}', [PictureController::class, 'destroy'])->name('picture.destroy')->where(['picture' => $idRegex])->can('delete', 'picture');
 });
