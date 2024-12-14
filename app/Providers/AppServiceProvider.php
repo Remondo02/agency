@@ -2,12 +2,13 @@
 
 namespace App\Providers;
 
-use App\Models\Picture;
+use App\Events\ContactRequestEvent;
+use App\Listeners\ContactListener;
 use App\Models\Property;
-use App\Policies\PicturePolicy;
 use App\Policies\PropertyPolicy;
 use App\Weather;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(Weather::class, fn () => new Weather('demo'));
+        $this->app->singleton(Weather::class, fn() => new Weather('demo'));
     }
 
     /**
@@ -28,5 +29,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
         Gate::policy(Property::class, PropertyPolicy::class);
+
+        // Manually Registering Events (no need by default)
+        // Event::listen(
+        //     ContactRequestEvent::class,
+        //     ContactListener::class,
+        // );
     }
 }
