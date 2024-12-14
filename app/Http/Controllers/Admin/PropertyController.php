@@ -7,8 +7,6 @@ use App\Http\Requests\Admin\PropertyFormRequest;
 use App\Models\Option;
 use App\Models\Picture;
 use App\Models\Property;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -17,6 +15,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
+        dd();
         //some policy methods like create do not require a model instance. In these situations, you should pass a class name to the authorize method.
         // dd(Gate::authorize('viewAny', Property::class));
         return view('admin.properties.index', [

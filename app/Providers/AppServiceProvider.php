@@ -6,6 +6,7 @@ use App\Models\Picture;
 use App\Models\Property;
 use App\Policies\PicturePolicy;
 use App\Policies\PropertyPolicy;
+use App\Weather;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(Weather::class, fn () => new Weather('demo'));
     }
 
     /**
