@@ -20,6 +20,7 @@ class ContactListener
      */
     public function handle(ContactRequestEvent $event): void
     {
-        $this->mailer->send(new PropertyContactMail($event->property, $event->data));
+        // Commenté pour le test du subscriber
+        // $this->mailer->send(new PropertyContactMail($event->property, $event->data));
     }
 }

@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\ContactRequestEvent;
-use App\Listeners\ContactListener;
+use App\Listeners\ContactEventSubscriber;
 use App\Models\Property;
 use App\Policies\PropertyPolicy;
 use App\Weather;
@@ -35,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
         //     ContactRequestEvent::class,
         //     ContactListener::class,
         // );
+
+        Event::subscribe(ContactEventSubscriber::class);
     }
 }
