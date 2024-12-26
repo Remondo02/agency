@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ContactRequestEvent;
 use App\Http\Requests\PropertyContactRequest;
 use App\Http\Requests\SearchPropertiesRequest;
-use App\Mail\PropertyContactMail;
 use App\Models\Property;
-use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use App\Notifications\ContactRequestNotification;
+use Illuminate\Support\Facades\Notification;
 
 class PropertyController extends Controller
 {
@@ -34,6 +34,10 @@ class PropertyController extends Controller
 
     public function show(string $slug, Property $property)
     {
+        $user = User::first();
+        // Mark all notifications as read
+        // dd($user->notifications->markAsRead());
+        // dd($user->unreadNotifications);
         $expectedSlug = $property->getSlug();
         if ($slug !== $expectedSlug) {
             return to_route('property.show', ['slug' => $expectedSlug, 'property' => $property]);
@@ -46,7 +50,10 @@ class PropertyController extends Controller
 
     public function contact(Property $property, PropertyContactRequest $request)
     {
-        event(new ContactRequestEvent($property, $request->validated()));
+        // Choisir manuellement comment faire les choses
+        Notification::route('mail', 'john@admin.fr')->notify(new ContactRequestNotification($property, $request->validated()));
+        // $user = User::first();
+        // $user->notify(new ContactRequestNotification($property, $request->validated()));
         return back()->with('success', 'Votre demande de contact a bien été envoyé');
     }
 }
