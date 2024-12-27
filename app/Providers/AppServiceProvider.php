@@ -6,6 +6,7 @@ use App\Listeners\ContactEventSubscriber;
 use App\Models\Property;
 use App\Policies\PropertyPolicy;
 use App\Weather;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+        JsonResource::withoutWrapping();
         Gate::policy(Property::class, PropertyPolicy::class);
 
         // Manually Registering Events (no need by default)
