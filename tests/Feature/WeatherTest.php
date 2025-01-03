@@ -18,5 +18,5 @@ test('with bad weather', function () {
     });
     $response = $this->get('/api/weather');
     $response->assertOk();
-    $response->assertJsonPath('weather', 'sunny');
+    $response->assertJsonPath('weather', 'rainy');
 });

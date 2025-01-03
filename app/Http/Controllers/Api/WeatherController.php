@@ -9,6 +9,6 @@ class WeatherController extends Controller
 {
     public function index(Weather $weather)
     {
-        return ['weather' => $weather->isSunnyTomorrow() ? "sunny" : 'rainy'];
+        return ['weather' => $weather->isSunnyTomorrow() ? "sunny" : "rainy"];
     }
 }
