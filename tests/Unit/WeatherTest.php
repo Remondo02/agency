@@ -1,31 +1,38 @@
 <?php
 
 use App\Weather;
+use Illuminate\Cache\Repository;
 use Illuminate\Support\Facades\Cache;
+use Mockery;
 
 afterEach(function () {
-    // This is the equivalent of tearDown()
+    // Clean up Mockery and cache state after each test
     Cache::clearResolvedInstances();
+    Mockery::close();
 });
 
 test('returns true when cache is null', function () {
-    Cache::shouldReceive('get')
+    /** @var Repository|Mockery\MockInterface $mock */
+    $mock = Mockery::mock(Repository::class);
+    $mock->shouldReceive('get')
         ->with('weather')
         ->once()
         ->andReturn(null);
 
-    $weather = new Weather();
+    $weather = new Weather($mock);
 
     $this->assertTrue($weather->isSunnyTomorrow());
 });
 
 test('returns false when cache is false', function () {
-    Cache::shouldReceive('get')
+    /** @var Repository|Mockery\MockInterface $mock */
+    $mock = Mockery::mock(Repository::class);
+    $mock->shouldReceive('get')
         ->with('weather')
         ->once()
         ->andReturn(false);
 
-    $weather = new Weather();
+    $weather = new Weather($mock);
 
     $this->assertFalse($weather->isSunnyTomorrow());
 });
