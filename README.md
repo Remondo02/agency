@@ -1,66 +1,49 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Real Estate Agency
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Description
 
-## About Laravel
+This is a full-stack web application designed for a fictional real estate agency, enabling users to create, update, or delete property listings. The application features a homepage that displays the latest four available properties that are not yet sold, a properties page where all listings can be viewed with filtering functionality and pagination, and a single property page for detailed views. The single property page includes all relevant property details, a slider showcasing the property's images, and a contact form for users interested in the property.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+An admin panel is available for authenticated users with role-based permissions, allowing administrators to manage properties and options. Administrators can create, update, and delete listings, and multiple images can be added to a property. When an image is deleted, the application triggers the corresponding route using HTMX.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The application is built with Laravel, Bootstrap, HTMX, and Glide. It also uses the Tom Select library to enhance the user experience when selecting options.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![Project thumbnail](./public/homepage.png)
 
-## Learning Laravel
+## Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   [Laravel](https://laravel.com/) - Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in most web projects.
+-   [Bootstrap](https://getbootstrap.com/) - A powerful, extensible, and feature-packed frontend toolkit for building fast and responsive sites. Learn how to customize, include, and use Bootstrap with Sass, CSS variables, CSS classes, and JavaScript plugins.
+-   [HTMX](https://htmx.org/) - htmx gives you access to AJAX, CSS Transitions, WebSockets and Server Sent Events directly in HTML, using attributes, so you can build modern user interfaces with the simplicity and power of hypertext htmx is small (~14k min.gz'd), dependency-free, extendable, IE11 compatible & has reduced code base...
+-   [Glide](https://glide.thephpleague.com/) - Glide is a wonderfully easy on-demand image manipulation library written in PHP. Its straightforward API is exposed via HTTP, similar to cloud image processing services like Imgix and Cloudinary.
+-   [Tom Select](https://tom-select.js.org/) - With autocomplete and native-feeling keyboard navigation, it's useful for tagging, contact lists, country selectors, and so on. Tom Select was forked from selectize.js with four main objectives: modernizing the code base, decoupling from jQuery, expanding functionality, and addressing issue backlogs..
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Project structure
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+PROJECT_ROOT
+├── app
+│   ├── Enums                     # Custom Enum defining property options
+│   ├── Http
+│   │   ├── Controllers           # Controllers for handling HTTP requests
+│   │   ├── Requests              # Form validation logic
+│   ├── Mail                      # Handles sending property inquiry emails
+│   ├── Models                    # Eloquent models for database interactions
+│   ├── Policies                  # Authorization policies for images and properties
+│   └── Providers                 # Service providers configuring app services
+├── database
+│   ├── factories                 # Factories to create dummy data for testing
+│   ├── migrations                # Project-specific database migrations
+│   └── seeders                   # Seeders for adding initial data to the database
+├── resources
+│   ├── views                     # Blade templates for frontend rendering
+│   │   ├── admin                 # Admin panel views
+│   │   ├── auth                  # Authentication views
+│   │   ├── emails                # Email templates
+│   │   ├── property              # Property-related pages
+│   │   ├── shared                # Shared UI components
+├── routes
+│   └── web.php                   # Web routes for the application
+└── tests
+    └── Feature                   # Feature tests for property functionality
+```
